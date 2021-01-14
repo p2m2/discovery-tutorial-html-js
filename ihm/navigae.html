@@ -41,7 +41,7 @@
         <script src="https://unpkg.com/terraformer-arcgis-parser@1.0.5"></script>
         <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
 
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/p2m2/Discovery@readme/dist/discovery-web.js"> </script>
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/p2m2/Discovery@master/dist/discovery-web.js"> </script> 
     </head>
 
     <body onload="initialize()">
@@ -70,12 +70,18 @@
     config.setConfigString(`
           {
           "sources" : [{
-          "id"  : "dbpedia",
-          "url" : "https://cors-anywhere.herokuapp.com/https://www.navigae.fr/repositories/Navigae",
-          "typ" : "Navigae",
-          "method" : "POST",
-          "mimetype" : "json"
-           }]}
+		  "id"  : "dbpedia",
+		  "url" : "https://cors-anywhere.herokuapp.com/https://www.navigae.fr/repositories/Navigae",
+		  "typ" : "Navigae",
+		  "method" : "POST",
+		  "mimetype" : "json"
+	  }],
+
+          "settings" : {
+		"logLevel" : "warn",
+                "sizeBatchProcessing" : 20
+            }
+          }
           `)
 
     function initialize() {

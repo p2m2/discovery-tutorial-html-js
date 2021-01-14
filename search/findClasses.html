@@ -2,19 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Count</title>
+    <title>Find Classes</title>
 </head>
 <body>
-<script>var exports = {"__esModule": true};</script>
-<script type="text/javascript" src="../../../discovery/js/target/scala-2.13/discovery-opt.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/p2m2/Discovery@master/dist/discovery-web.js"> </script>
 <pre id="demo"></pre>
 </body>
 <script>
-      var EasySparqlStatementConfiguration = exports.EasySparqlStatementConfiguration ;
-      var EasySparqlEngine = exports.EasySparqlEngine ;
-      var URI = exports.URI ;
+      var SWDiscoveryConfiguration = discovery.SWDiscoveryConfiguration ;
+      var SWDiscovery = discovery.SWDiscovery ;
+      var URI = discovery.URI
 
-      let config = new EasySparqlStatementConfiguration()
+      let config = new SWDiscoveryConfiguration()
 
       config.setConfigString(`
           {
@@ -26,7 +25,7 @@
           "mimetype" : "json"
            }]}
           `)
-        let query = new EasySparqlEngine(config);
+        let query = new SWDiscovery(config);
 
         let r = query.something("h1")
                       .set(URI("http://dbpedia.org/resource/Abbie_Hoffman"))
