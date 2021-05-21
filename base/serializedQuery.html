@@ -1,20 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <title>The Scala.js Tutorial</title>
-  </head>
-  <body>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/p2m2/discovery@develop/dist/discovery-web.min.js"> </script>
+<script
+        type="text/javascript" 
+        src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.2.0/dist/discovery-web.min.js"> 
+</script>
+<body/>
 
-    <pre id="demo"></pre>
-  </body>
-  <script>
-      
-      var SWDiscoveryConfiguration = discovery.SWDiscoveryConfiguration ;
-      var SWDiscovery = discovery.SWDiscovery ;
-      var URI = discovery.URI
-      
+<script>
+            
       let config = SWDiscoveryConfiguration.setConfigString(`
           {
           "sources" : [{
@@ -32,31 +23,30 @@
         let querySerialized = query.something("h1")
                      .set(URI("http://dbpedia.org/resource/%C3%84lvdalen"))
                      .isSubjectOf(URI("http://www.w3.org/2002/07/owl#sameAs"),"sub")
-                     .getSerializedQuery
+                     .getSerializedString
 
-        console.log(querySerialized)
+        console.log(querySerialized) ;
            
-        document.getElementById("demo").appendChild(document.createElement("p").appendChild(document.createTextNode(querySerialized)))
+        document.body.innerHTML += JSON.stringify(querySerialized) ;
 
-
-        new SWDiscovery()
-             .setSerializedQuery(querySerialized)
-             .select()
+        SWDiscovery()
+             .setSerializedString(querySerialized)
+             .select("sub")
              .commit()
              .raw()
              .then((response) => {
-		  let ul = document.createElement("ul")
-		  document.getElementById("demo").appendChild(ul)
+		  document.body.innerHTML += "<ul>" ;
+		  
 		  for (let i=0;i<response.results.bindings.length;i++) {
 		    console.log(response.results.bindings[i]["sub"])
-		    let li = document.createElement("li");
-		    li.appendChild(document.createTextNode(JSON.stringify(response.results.bindings[i]["sub"])));
+		    let li = document.body.innerHTML += "<li>" + JSON.stringify(response.results.bindings[i]["sub"]) + "</li>";
 		    ul.appendChild(li);
-           }
+                  }
+                  document.body.innerHTML += "</ul>" ;
         }).catch( (error) => {
           console.error(" -- catch exception --")
           console.error(error)
         } );
 
-    </script>
-</html>
+</script>
+

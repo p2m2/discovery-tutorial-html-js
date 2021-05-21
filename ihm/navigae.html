@@ -25,23 +25,22 @@
                 100% { transform: rotate(360deg); }
             }
         </style>
+ 
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+        <script
+		type="text/javascript" 
+		src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.2.0/dist/discovery-web.min.js"> 
+	</script>
 
-
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-            integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-            crossorigin=""/>
-
-
-        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-            integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-            crossorigin=""></script>
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
         <script src="https://unpkg.com/terraformer@1.0.7"></script>
         <script src="https://unpkg.com/terraformer-arcgis-parser@1.0.5"></script>
         <script src="https://unpkg.com/terraformer-wkt-parser@1.1.2"></script>
 
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.0.3/dist/discovery-web.min.js"> </script>
+
+
     </head>
 
     <body onload="initialize()">
@@ -55,28 +54,19 @@
 
        <div id="map" style="width:100%; height:100%"></div>
     </body>
+
 </html>
+
 <script type="text/javascript">
-
-    var SWDiscoveryConfiguration = discovery.SWDiscoveryConfiguration ;
-    var SWDiscovery = discovery.SWDiscovery ;
-    var URI = discovery.URI
-
     var map ;
     var layerGeoJSON ;
 
-    let config = new SWDiscoveryConfiguration()
-
-    config.setConfigString(`
+    let config = SWDiscoveryConfiguration.setConfigString(`
           {
           "sources" : [{
-		  "id"  : "dbpedia",
-		  "url" : "https://cors-anywhere.herokuapp.com/https://www.navigae.fr/repositories/Navigae",
-		  "typ" : "Navigae",
-		  "method" : "POST",
-		  "mimetype" : "json"
+		  "id"  : "Navigae",
+		  "url" : "https://cors-anywhere.herokuapp.com/https://www.navigae.fr/repositories/Navigae"
 	  }],
-
           "settings" : {
 		"logLevel" : "warn",
                 "sizeBatchProcessing" : 20
@@ -187,3 +177,4 @@
     */
 
 </script>
+
