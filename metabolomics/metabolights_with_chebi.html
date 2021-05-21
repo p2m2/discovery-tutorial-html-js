@@ -1,0 +1,34 @@
+<script
+        type="text/javascript" 
+        src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.2.0/dist/discovery-web.min.js"> 
+</script>
+
+<script>
+      var config = SWDiscoveryConfiguration.setConfigString(`
+          {
+          "sources" : [{
+          "id"  : "metabolights",
+          "url" : "https://metabolights.semantic-metabolomics.fr/sparql"
+           }]}
+          `);
+
+      SWDiscovery(config)
+          .something()
+            .set(URI("http://purl.obolibrary.org/obo/CHEBI_4167"))
+              .isObjectOf(URI("https://www.ebi.ac.uk/metabolights/property#Xref"),"study")
+                .datatype(URI("http://www.w3.org/2000/01/rdf-schema#label"),"label")
+          .select("study","label")
+               .commit()
+               .raw().then((response) => {
+          
+          for (let i=0;i<response.results.bindings.length;i++) {
+            let study=response.results.bindings[i]["study"].value;
+            let label=response.results.datatypes["label"][study][0].value; 
+            console.log(study+"-->"+label);
+          }
+
+        }).catch( (error) => {
+          console.error(" -- catch exception --")
+          console.error(error)
+        } );
+</script>
