@@ -1,0 +1,19 @@
+<script
+        type="text/javascript" 
+        src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.2.0/dist/discovery-web.min.js"> 
+</script>
+<script>
+      let config = SWDiscoveryConfiguration.setConfigString(`
+          {
+          "sources" : [{
+		  "id"  : "dbpedia",
+		  "url" : "https://dbpedia.org/sparql"
+           }]}
+          `);
+
+        SWDiscovery(config)
+        .something("h1")
+         .set(URI("http://dbpedia.org/resource/Abbie_Hoffman"))
+         .helper();
+    </script>
+</html>

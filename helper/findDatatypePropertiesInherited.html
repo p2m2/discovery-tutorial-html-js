@@ -1,0 +1,35 @@
+<script
+        type="text/javascript" 
+        src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.2.0/dist/discovery-web.min.js"> 
+</script>
+<script>
+      let config = SWDiscoveryConfiguration.setConfigString(`
+          {
+          "sources" : [{
+		  "id"  : "dbpedia",
+		  "url" : "https://dbpedia.org/sparql"
+           }]}
+          `);
+
+        SWDiscovery(config)
+        .something("h1")
+         .set(URI("http://dbpedia.org/resource/Abbie_Hoffman"))
+         .finder
+         .findDatatypeProperties(URI("DatatypeProperty","owl"))
+         .then((lUris) => {
+            
+          document.body.innerHTML += "<ul>" ;
+            
+	  for (let i=0;i<lUris.length;i++) {
+	    console.log(JSON.stringify(lUris[i]));
+	    document.body.innerHTML += "<li>" ;
+	    document.body.innerHTML += JSON.stringify(lUris[i]);
+	    document.body.innerHTML += "</li>" ;
+	  }
+	    document.body.innerHTML += "</ul>" ;
+	}).catch( (error) => {
+	  console.error(" -- catch exception --")
+	  console.error(error)
+	} );
+</script>
+
