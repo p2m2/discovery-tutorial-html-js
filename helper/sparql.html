@@ -1,0 +1,34 @@
+<script
+        type="text/javascript" 
+        src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.2.0/dist/discovery-web.min.js"> 
+</script>
+<body/>
+<script>
+function htmlEncode(str)
+{
+  str = str.replace(/&/g, "&amp;");
+  str = str.replace(/>/g, "&gt;");
+  str = str.replace(/</g, "&lt;");
+  str = str.replace(/"/g, "&quot;");
+  str = str.replace(/'/g, "&#039;");
+  return str;
+}
+
+
+      let config = SWDiscoveryConfiguration.setConfigString(`
+          {
+          "sources" : [{
+		  "id"  : "dbpedia",
+		  "url" : "https://dbpedia.org/sparql"
+           }]}
+          `);
+
+        document.body.innerHTML += "<pre>" +
+         htmlEncode(SWDiscovery(config)
+          .something("h1")
+           .set(URI("http://dbpedia.org/resource/Abbie_Hoffman"))
+            .isSubjectOf("http://dbpedia.org/property/birthDate")
+            .sparql()) + "</pre>"
+
+    </script>
+</html>
