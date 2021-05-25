@@ -1,0 +1,24 @@
+<script
+        type="text/javascript" 
+        src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.2.0/dist/discovery-web.min.js"> 
+</script>
+<body/>
+<script>
+      let config = SWDiscoveryConfiguration.setConfigString(`
+          {
+          "sources" : [{
+          "id"  : "dbpedia",
+          "url" : "https://dbpedia.org/sparql",
+          "typ" : "tps",
+          "method" : "POST"
+           }]}
+          `)
+       
+        SWDiscovery(config)
+             .something("h1")
+               .set(URI("http://dbpedia.org/resource/%C3%84lvdalen"))
+                 .isSubjectOf(URI("http://www.w3.org/2002/07/owl#sameAs"),"sub")
+                 .console() ;
+                    
+</script>
+

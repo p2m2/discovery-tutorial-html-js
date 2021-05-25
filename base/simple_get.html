@@ -18,7 +18,7 @@
         let req = query.something("h1")
                      .set(URI("http://dbpedia.org/resource/%C3%84lvdalen"))
                      .isSubjectOf(URI("http://www.w3.org/2002/07/owl#sameAs"),"sub")
-                     .select("sub")
+                     .select(["sub"],10,0)
 
         req.commit().raw().then((response) => {
           
