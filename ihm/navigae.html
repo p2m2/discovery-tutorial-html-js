@@ -147,9 +147,7 @@
 
     }
 
-    query = new SWDiscovery(config);
-
-    let classes_request = query.something("instance")
+   let classes_request = SWDiscovery(config).something("instance")
                           .isSubjectOf(URI("http://navigae.fr/ontology#hasPolygonGeometry"))
                           .focus("instance")
                           .isSubjectOf(URI("a"),"entity")
