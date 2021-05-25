@@ -15,18 +15,9 @@
         .something("h1")
          .set(URI("http://dbpedia.org/resource/Abbie_Hoffman"))
          .finder
-           .findClasses(URI("Class","owl"))
-           .then((lUris) => {
-            
-          document.body.innerHTML += "<ul>" ;
-            
-	  for (let i=0;i<lUris.length;i++) {
-	    console.log(JSON.stringify(lUris[i]));
-	    document.body.innerHTML += "<li>" ;
-	    document.body.innerHTML += JSON.stringify(lUris[i]);
-	    document.body.innerHTML += "</li>" ;
-	  }
-	    document.body.innerHTML += "</ul>" ;
+           .count()
+           .then(c => {
+            document.body.innerHTML += "there are " + c + " results." ;
 	}).catch( (error) => {
 	  console.error(" -- catch exception --")
 	  console.error(error)

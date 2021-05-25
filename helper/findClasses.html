@@ -17,19 +17,19 @@
          .finder
           .findClasses()
            .then((lUris) => {
-            document.body.innerHTML += "<ul>" ;
-	  
             
-          for (let i=0;i<lUris.length;i++) {
-            console.log(JSON.stringify(lUris[i]));
-            document.body.innerHTML += "<li>" ;
-            document.body.innerHTML += JSON.stringify(lUris[i].toString());
-            document.body.innerHTML += "</li>" ;
-          }
-            document.body.innerHTML += "</ul>" ;
-        }).catch( (error) => {
-          console.error(" -- catch exception --")
-          console.error(error)
-        } );
+          document.body.innerHTML += "<ul>" ;
+            
+	  for (let i=0;i<lUris.length;i++) {
+	    console.log(JSON.stringify(lUris[i]));
+	    document.body.innerHTML += "<li>" ;
+	    document.body.innerHTML += JSON.stringify(lUris[i]);
+	    document.body.innerHTML += "</li>" ;
+	  }
+	    document.body.innerHTML += "</ul>" ;
+	}).catch( (error) => {
+	  console.error(" -- catch exception --")
+	  console.error(error)
+	} );
     </script>
 </html>

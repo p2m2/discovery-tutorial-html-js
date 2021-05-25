@@ -1,48 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Find Datatype properties</title>
-</head>
-<body>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.0.3/dist/discovery-web.min.js"> </script>
-<pre id="demo"></pre>
-</body>
+<script
+        type="text/javascript" 
+        src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.2.0/dist/discovery-web.min.js"> 
+</script>
 <script>
-
-      var SWDiscoveryConfiguration = discovery.SWDiscoveryConfiguration ;
-      var SWDiscovery = discovery.SWDiscovery ;
-      var URI = discovery.URI
-
-      let config = new SWDiscoveryConfiguration();
-
-      config.setConfigString(`
+      let config = SWDiscoveryConfiguration.setConfigString(`
           {
           "sources" : [{
-          "id"  : "dbpedia",
-          "url" : "https://dbpedia.org/sparql",
-          "typ" : "tps",
-          "method" : "POST",
-          "mimetype" : "json"
+		  "id"  : "dbpedia",
+		  "url" : "https://dbpedia.org/sparql"
            }]}
-          `)
-        let query = new SWDiscovery(config);
+          `);
 
-        let r = query.something("h1")
-                      .set(URI("http://dbpedia.org/resource/Abbie_Hoffman"))
-                      .findDatatypeProperties()
+        SWDiscovery(config)
+        .something("h1")
+         .set(URI("http://dbpedia.org/resource/Abbie_Hoffman"))
+         .finder
+         .findDatatypeProperties()
+          .then((lUris) => {
+            
+          document.body.innerHTML += "<ul>" ;
+            
+	  for (let i=0;i<lUris.length;i++) {
+	    console.log(JSON.stringify(lUris[i]));
+	    document.body.innerHTML += "<li>" ;
+	    document.body.innerHTML += JSON.stringify(lUris[i]);
+	    document.body.innerHTML += "</li>" ;
+	  }
+	    document.body.innerHTML += "</ul>" ;
+	}).catch( (error) => {
+	  console.error(" -- catch exception --")
+	  console.error(error)
+	} );
+</script>
 
-        r.then((lUris) => {
-            let ul = document.createElement("ul")
-            document.getElementById("demo").appendChild(ul)
-          for (let i=0;i<lUris.length;i++) {
-            let li = document.createElement("li");
-            li.appendChild(document.createTextNode(JSON.stringify(lUris[i].toString())));
-            ul.appendChild(li);
-          }
-        }).catch( (error) => {
-          console.error(" -- catch exception --")
-          console.error(error)
-        } );
-    </script>
-</html>
