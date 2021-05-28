@@ -1,0 +1,35 @@
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/p2m2/discovery@0.2.0/dist/discovery-web.min.js"> </script> 
+<script>
+      let config = SWDiscoveryConfiguration.setConfigString(`
+          {
+          "sources" : [{
+		  "id"        : "file_metabo",
+		  "url"       : "https://raw.githubusercontent.com/p2m2/discovery/develop/shared/src/test/resources/metabo.ttl",
+		  "mimetype"  : "text/turtle"
+           }],
+          "settings" : {
+           "logLevel" : "info"
+           }
+           }
+          `)
+        SWDiscovery(config)
+                      .prefix("pp","https://metabohub.p2m2.org/ontology/property/")
+                      .something("compound")
+                        .isSubjectOf("pp:InChIKey")
+                           .filter.contains("MIYGQTFETY")
+                      .focus("compound")
+                        .console() 
+                        .helper() // display information on the web page and propose new building block.
+			.select("compound")
+			.commit().raw().then((response) => {
+			  
+			  for (let i=0;i<response.results.bindings.length;i++) {
+			    let iValue =response.results.bindings[i]["compound"].value;
+			      console.log(iValue );
+			  }
+
+			}).catch( (error) => {
+			  console.error(" -- catch exception --")
+			  console.error(error)
+			} );
+</script>
